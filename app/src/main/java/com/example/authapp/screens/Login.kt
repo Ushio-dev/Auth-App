@@ -1,4 +1,4 @@
-package com.example.screens
+package com.example.authapp.screens
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
