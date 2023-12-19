@@ -15,17 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Visibility
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,11 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -52,6 +39,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.authapp.LoginError
 import com.example.authapp.R
+import com.example.authapp.components.EmailTextInput
+import com.example.authapp.components.PasswordTextInput
 import com.example.authapp.ui.theme.FaceBookColor
 import com.example.authapp.ui.theme.Purple40
 
@@ -133,6 +122,7 @@ fun Login(navController: NavHostController) {
     }
 }
 
+/*
 @Composable
 fun EmailTextInput(email: String, updateEmail: (String) -> Unit, emailError: LoginError) {
 
@@ -177,6 +167,8 @@ fun EmailTextInput(email: String, updateEmail: (String) -> Unit, emailError: Log
     )
 }
 
+ */
+/*
 @Composable
 fun PasswordTextInput(
     password: String,
@@ -244,6 +236,8 @@ fun PasswordTextInput(
         shape = RoundedCornerShape(25)
     )
 }
+
+ */
 
 @Composable
 fun SignInButton(isPasswordWrong: () -> Unit) {

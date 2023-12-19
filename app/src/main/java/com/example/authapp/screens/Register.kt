@@ -34,3 +34,4 @@ fun BackButton(navController: NavHostController) {
         Text(text = "Volver a Login")
     }
 }
+
