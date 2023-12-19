@@ -1,12 +1,9 @@
 package com.example.authapp.screens
 
 import android.util.Log
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,7 +35,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -50,15 +46,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.authapp.LoginError
 import com.example.authapp.R
+import com.example.authapp.ui.theme.FaceBookColor
 import com.example.authapp.ui.theme.Purple40
 
 @Composable
-fun Login() {
+fun Login(navController: NavHostController) {
     val context = LocalContext.current
 
     var email by remember {
@@ -122,9 +120,15 @@ fun Login() {
                     }
                 }
 
+                Toast.makeText(context, "Logeado", Toast.LENGTH_SHORT).show()
+                Log.d("Ingreso", "Logeado")
             })
-            Spacer(modifier = Modifier.height(50.dp))
+            Spacer(modifier = Modifier.height(60.dp))
             AlternativeSignIn()
+            Spacer(modifier = Modifier.height(50.dp))
+            LinkToRegister {
+                navController.navigate(route = "REGISTER")
+            }
         }
     }
 }
@@ -263,12 +267,12 @@ private fun checkValidPassword(password: String): Boolean {
 
 @Composable
 fun AlternativeSignIn() {
-    Row(
+    Column(
         modifier = Modifier.fillMaxWidth(),
-        Arrangement.SpaceEvenly,
-        Alignment.CenterVertically
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         GoogleSignIn()
+        Spacer(modifier = Modifier.height(20.dp))
         FacebookSignIn()
     }
 }
@@ -277,31 +281,77 @@ fun AlternativeSignIn() {
 fun GoogleSignIn() {
     Box(
         modifier = Modifier
+            .height(45.dp)
+            .width(220.dp)
+            .background(Color.White)
             .clickable {
-                Log.d("CLICK", "Logeando con Google")
-            }
-            .height(55.dp),
+                print("hola Mundo")
+            },
     ) {
-        Image(
-            modifier = Modifier.clip(RoundedCornerShape(8.dp)),
-            painter = painterResource(id = R.drawable.google_login),
-            contentDescription = "google-signin"
-        )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Image(
+                painter = painterResource(id = R.drawable.google_login),
+                contentDescription = "google-signin"
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 25.dp)
+                    .background(Color.White),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Text(text = "Ingresar con Google", textAlign = TextAlign.Center, fontSize = 12.sp)
+            }
+        }
     }
 }
 
 @Composable
 fun FacebookSignIn() {
-    Box(modifier = Modifier
-        .clickable {
-            Log.d("CLICK", "Logeando con Facebook")
+    Box(
+        modifier = Modifier
+            .background(color = FaceBookColor)
+            .height(45.dp)
+            .width(220.dp)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Image(
+                painter = painterResource(id = R.drawable.facebook_social_media_social_icon),
+                contentDescription = "google-signin"
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = FaceBookColor)
+                    .padding(start = 25.dp)
+                    .clickable {
+                        Log.d("CLICK", "Logeando con Facebook")
+                    },
+                contentAlignment = Alignment.CenterStart
+            ) {
+                Text(text = "Ingresar con Facebook", textAlign = TextAlign.Center, fontSize = 12.sp)
+            }
         }
-        .background(Color.Transparent)
-        .height(55.dp)) {
-        Image(
-            modifier = Modifier.clip(RoundedCornerShape(8.dp)),
-            painter = painterResource(id = R.drawable.facebook_social_media_social_icon),
-            contentDescription = "google-signin"
+    }
+}
+
+@Composable
+fun LinkToRegister(message: ()->Unit) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(text = "No tienes una cuenta?", fontSize = 12.sp)
+        Spacer(modifier = Modifier.width(5.dp))
+        Text(
+            modifier = Modifier.clickable {
+                message()
+            },
+            text = "Regístrate",
+            textDecoration = TextDecoration.Underline,
+            fontWeight = FontWeight.Bold,
+            fontSize = 12.sp
         )
     }
 }
